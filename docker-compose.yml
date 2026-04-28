@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  # 🛠️ Modo Desenvolvimento (com hot-reload)
+  portfolio-dev:
+    build:
+      context: .
+      target: dev
+    container_name: portfolio-retro-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
+    tty: true
+    command: npm run dev
+
+  # 🚀 Modo Produção (build otimizado com Nginx)
+  # portfolio-prod:
+  #   build:
+  #     context: .
+  #     target: production
+  #   container_name: portfolio-retro-prod
+  #   ports:
+  #     - "8080:80"
+  #   restart: unless-stopped
